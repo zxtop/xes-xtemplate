@@ -1,0 +1,6 @@
+{
+  "exclude": [
+    "json"
+  ],
+  "path":"./resource/"
+}
