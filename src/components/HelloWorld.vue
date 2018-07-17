@@ -10,7 +10,7 @@
   import { domStage, domEE } from "xes_pixi_renderer";
   import { canvasStage, canvasEE } from "xes_canvas_renderer";
   import { PixiExporter } from "xeditor-convertor";
-export default {
+export default{
   name: 'HelloWorld',
   components:{domStage,canvasStage},
   data () {
@@ -45,7 +45,7 @@ export default {
   .stageParent{
     width:19.2rem;
     height:10.8rem;
-    background:red;
+    background:pink;
     font-size:20px;
     margin: 0 auto;
   }
