@@ -5,10 +5,10 @@
   "author": "wangqi0902vip <wangqi0902@vip.qq.com>",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline  --progress --open --config build/webpack.dev.conf.js",
+    "dev": "webpack-dev-server --inline --progress --open --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "build": "node build/build.js",
-    "init": "node build/init.js&&node build/http-server.conf.js"
+    "init": "node build/init.js"
   },
   "dependencies": {
     "axios": "^0.18.0",
