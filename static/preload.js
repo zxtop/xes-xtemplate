@@ -1,12 +1,10 @@
 export const pageSizeFun = function (doc, win,widthNum,heightNum) {
-  console.log(widthNum,heightNum);
   var docEl = doc.documentElement;
   var resizeEvt = 'orientationchange' in win ? 'orientationchange' : 'resize';
   var onResize = function () {
     var clientWidth = docEl.clientWidth;
     var clientHeight = docEl.clientHeight;
     var base;
-
     if (!clientWidth) return;
 
     var aspectRatio = clientWidth / clientHeight;
