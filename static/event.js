@@ -11,12 +11,15 @@ export const EMIT_EVENT = function (event,pixiObj){
       event.on("mouseup", ev => {
         console.log(ev)
       });
-      // event.on("mouseout", ev => {
-      //   console.log(ev)
-      // });
-      // event.on("mouseover", ev => {
-      //   console.log(ev)
-      // });
+      event.on("mouseout", ev => {
+        console.log(ev)
+      });
+      event.on("mouseover", ev => {
+        console.log(ev)
+      });
+      event.on("mousemove",ev=>{
+        console.log(ev);
+      });
       event.on("keydown", ev => {
         console.log(ev)
       });

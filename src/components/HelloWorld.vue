@@ -34,6 +34,7 @@
         },
         () => {
           dataThis.stageObj = pixi.pixiApp.stage;
+          console.log(dataThis.stageObj);
           EMIT_EVENT(dataThis.canvasRenderer?canvasEE:domEE,dataThis.stageObj);
           dataThis.showStage = true;
         }

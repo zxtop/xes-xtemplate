@@ -5,7 +5,8 @@ export const GET_DATA_FROM_URL = function (callback) {
   let parsed = queryString.parse(location.search);
   //判断是否是二次编辑
   if (parsed.pageId) {
-    axios.get("http://courseware.xesv5.com/api/Page/getDataJsonByPageId", {
+    // http://localhost:5000#/
+    axios.get("http://courseware.xesv5.com/api/Page/getDataJsonByPageId",{
       pageId: parsed.pageId,
       type: 2
     })
@@ -16,7 +17,7 @@ export const GET_DATA_FROM_URL = function (callback) {
         console.log(response.status);
       });
   } else {
-    let path = decodeURIComponent(parsed.resourcePath);
+    let path = decodeURIComponent(parsed.path);
     getModuleJson(path + "/main.json", path + "/resource.json", path + "/moduleConfig.json", callback);
   }
 }
