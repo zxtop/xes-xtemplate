@@ -7,10 +7,14 @@ const tPath = path.resolve(config.path)
 function downloadUrl (urlList) {
   console.log('Start download resources!')
   urlList.map(url => {
-    if (!config.exclude.includes(url.ext)) {
+    if (url.name === 'main'||!config.exclude.includes(url.ext)) {
       let temp = url.host + url.src.slice(1)
       console.log('resource:', url.name + '.' + url.ext)
       request(temp).pipe(fs.createWriteStream(tPath + '/' + url.name + '.' + url.ext))
+      if(url.name === 'main'){
+        console.log('resource: moduleConfig.json')
+        request(temp.replace('main','moduleConfig')).pipe(fs.createWriteStream(tPath + '/moduleConfig.json'))
+      }
     }
   })
   process.stdout.write('是否启动资源服务？ y/n : ')
