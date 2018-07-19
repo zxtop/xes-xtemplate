@@ -1,5 +1,4 @@
-export function mainFun(pixiObjs) {
-    (function () {
-        console.log(pixiObjs);
-    }.bind(pixiObjs))();
-};
+export function mainFun () {
+  console.log(this)
+  console.log(1123)
+}
