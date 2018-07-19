@@ -47,7 +47,7 @@ function downloadUrl () {
           child('http-server ./resource -p 5000 --cors', (error, stdout, stderr) => {
             if (error) {
               console.error(`http-server命令错误: ${error}`)
-              return
+              process.exit()
             }
             console.log(`http-server输出日志: ${stdout}`)
             console.log(`http-server启动错误: ${stderr}`)
