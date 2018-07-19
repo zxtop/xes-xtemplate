@@ -42,20 +42,20 @@
   },
   methods:{
 
-    // UrlParamHash: function (url,name){
-    //   let dataUrl = url||window.location.href||window.location.search;
-    //   let params = {}, h;
-    //   let host= dataUrl.split("?")[0];
-    //   host.indexOf("http")>=0?params["host"]=host:"";
-    //   let hash = dataUrl.slice(dataUrl.indexOf("?") + 1).split('&');
-    //   for(let i = 0; i<hash.length; i++) {
-    //     h = hash[i].split("=");
-    //     params[h[0]] = h[1];
-    //   }
-    //   if(name){return params[name]}else {
-    //     return params;
-    //   }
-    // },
+     UrlParamHash: function (url,name){
+       let dataUrl = url||window.location.href||window.location.search;
+       let params = {}, h;
+       let host= dataUrl.split("?")[0];
+       host.indexOf("http")>=0?params["host"]=host:"";
+       let hash = dataUrl.slice(dataUrl.indexOf("?") + 1).split('&');
+       for(let i = 0; i<hash.length; i++) {
+         h = hash[i].split("=");
+         params[h[0]] = h[1];
+       }
+       if(name){return params[name]}else {
+         return params;
+       }
+     },
   }
 }
 </script>
