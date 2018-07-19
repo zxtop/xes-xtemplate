@@ -19,8 +19,8 @@
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "xeditor-convertor": "^1.0.36",
-    "xes_canvas_renderer": "1.0.3",
-    "xes_pixi_renderer": "^1.1.7"
+    "xes_pixi_renderer": "^1.1.9",
+    "xes_canvas_renderer": "1.0.5"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
