@@ -17,7 +17,7 @@
     components:{domStage,canvasStage},
     data () {
       return {
-        canvasRenderer:true,
+        canvasRenderer:false,
         stageObj:{},
         showStage:false,
       }

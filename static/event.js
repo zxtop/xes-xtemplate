@@ -18,7 +18,7 @@ export const EMIT_EVENT = function (event,pixiObj){
         console.log(ev)
       });
       event.on("mousemove",ev=>{
-        console.log(ev);
+        // console.log(ev);
       });
       event.on("keydown", ev => {
         console.log(ev)

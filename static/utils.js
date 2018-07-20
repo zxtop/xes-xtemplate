@@ -23,6 +23,9 @@ export const GET_DATA_FROM_URL = function (callback) {
 }
 
 function getModuleJson(mainPath, resPath, moduleConfigPath, callback) {
+  window.localStorage.removeItem("main");
+  window.localStorage.removeItem("resource");
+  window.localStorage.removeItem("moduleConfig");
   let requestMain = () => {
     return axios.get(mainPath, {})
       .then(function (response) {
