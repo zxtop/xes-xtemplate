@@ -1,7 +1,7 @@
 const path = require('path')
 const request = require('request')
 const fs = require('fs')
-const child = require('child_process').exec
+const {spawn} = require('child_process')
 const config = require('../config/resource.conf.json')
 const tPath = path.resolve(config.path)
 let counter = 0
@@ -14,12 +14,19 @@ function downloadUrl () {
     switch (counter) {
       case 0:
         request('http://testmv.xesimg.com/courseware_pages/' + chunk + '/resource.json', (e, data) => {
-          'use strict'
-          if(e||data === undefined){
-            console.error('resourceID错误，error: ',e)
+          if (e || data.statusCode !== 200) {
+            console.log('resourceID错误，error: ', e)
           }
-          let response = JSON.parse(data.body)
-          let urlList = response.list
+          console.log("================================================")
+          let response = ''
+          let urlList = ''
+          try {
+            response = JSON.parse(data.body)
+          }catch (e){
+            console.log('error code: ',e)
+            process.exit()
+          }
+          urlList = response.list
           urlList.map(url => {
             if (!config.exclude.includes(url.ext)) {
               let temp = url.host + url.src.slice(1)
@@ -33,6 +40,7 @@ function downloadUrl () {
           request('http://testmv.xesimg.com/courseware_pages/' + chunk + '/main.json').pipe(fs.createWriteStream(tPath + '/main.json'))
           console.log('resource: moduleConfig.json')
           request('http://testmv.xesimg.com/courseware_pages/' + chunk + '/moduleConfig.json').pipe(fs.createWriteStream(tPath + '/moduleConfig.json'))
+          console.log('================================================')
           process.stdout.write('是否开启服务： y/n : ')
           counter++
         })
@@ -43,15 +51,8 @@ function downloadUrl () {
           console.log('启动服务成功！')
           console.log('请打开另外的terminal or cmd窗口执行 npm run dev')
           console.log('您可通过 http://localhost:5000 访问资源')
-          console.log('ctrl-c 停止服务')
-          child('http-server ./resource -p 5000 --cors', (error, stdout, stderr) => {
-            if (error) {
-              console.error(`http-server命令错误: ${error}`)
-              process.exit()
-            }
-            console.log(`http-server输出日志: ${stdout}`)
-            console.log(`http-server启动错误: ${stderr}`)
-          })
+          console.log('回车停止服务')
+          spawn('http-server', ['./resource', '-p', '5000', '--cors'])
         } else {
           console.log('cancel')
           process.exit()
