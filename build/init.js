@@ -52,7 +52,7 @@ function downloadUrl () {
           console.log('请打开另外的terminal or cmd窗口执行 npm run dev')
           console.log('您可通过 http://localhost:5000 访问资源')
           console.log('回车停止服务')
-          spawn('http-server', ['./resource', '-p', '5000', '--cors'])
+          process.exit()
         } else {
           console.log('cancel')
           process.exit()
