@@ -35,9 +35,10 @@
           () => {
             dataThis.stageObj = pixi.pixiApp.stage;
             pageSizeFun(document, window,dataThis.stageObj.width,dataThis.stageObj.height);
-            EMIT_EVENT(dataThis.canvasRenderer?canvasEE:domEE,dataThis.stageObj);
+            let stageObj = dataThis.stageObj.toObj();
+            EMIT_EVENT(dataThis.canvasRenderer?canvasEE:domEE,dataThis.stageObj, stageObj);
             dataThis.showStage = true;
-            mainFun.bind(dataThis.stageObj.toObj())();
+            mainFun.bind(stageObj)();
           }
         );
       });
