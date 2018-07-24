@@ -1,12 +1,14 @@
 const path = require('path')
 const request = require('request')
 const fs = require('fs')
-const {spawn} = require('child_process')
 const config = require('../config/resource.conf.json')
 const tPath = path.resolve(config.path)
 let counter = 0
 
 function downloadUrl () {
+  if(!fs.existsSync(path.resolve('./resource'))){
+    fs.mkdirSync(path.resolve('./resource'))
+  }
   process.stdin.setEncoding('utf-8')
   process.stdout.write('请输入resourceID : ')
   process.stdin.on('data', (chunk) => {
