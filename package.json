@@ -20,7 +20,8 @@
     "vue-router": "^3.0.1",
     "xeditor-convertor": "^1.0.36",
     "xes_pixi_renderer": "^1.1.9",
-    "xes_canvas_renderer": "1.0.5"
+    "xes_canvas_renderer": "1.0.5",
+    "pixi-question-choice": "1.0.3"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
