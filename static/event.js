@@ -15,14 +15,15 @@ let getObj = (obj, id) => {
   return getIdObj(obj, id);
 };
 
+
 let eventPropagation = (ev, type, dataEvent) => {
   let evObj = ev;
   let targetObj = getObj(stageObj, ev.id * 1);
   if (targetObj === undefined) { console.error("没有找到id是" + ev.id + "对象"); return }
   if (dataEvent[targetObj.name] === undefined) { console.error("没有在this中找到name是" + targetObj.name + "的对象 无法触发emit"); return }
   dataEvent[targetObj.name].emit(type, ev);
-  // console.log("id:" + ev.id + "  触发" + type);
-  if (targetObj.parent.parent) {
+  // console.log("id:" + ev.id +"  name:"+targetObj.name+"  触发" + type);
+  if (targetObj.parent) {
     evObj.id = targetObj.parent.id;
     eventPropagation(evObj, type, dataEvent);
   }
