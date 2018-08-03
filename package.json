@@ -18,10 +18,10 @@
     "request": "^2.87.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
-    "xeditor-convertor": "^1.0.36",
+    "xeditor-convertor": "^1.0.60",
     "xes_pixi_renderer": "^1.1.9",
     "xes_canvas_renderer": "1.0.5",
-    "pixi-question-choice": "1.0.4"
+    "xes-choice": "^1.0.7"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
