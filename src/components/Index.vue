@@ -8,9 +8,9 @@
   import { domStage, domEE } from "xes_pixi_renderer";
   import { canvasStage, canvasEE } from "xes_canvas_renderer";
   import { PixiExporter } from "xeditor-convertor";
-  import {GET_DATA_FROM_URL} from "../../static/utils"
-  import {EMIT_EVENT} from "../../static/event";
-  import {pageSizeFun} from "../../static/preload";
+  import {GET_DATA_FROM_URL} from "../core/utils"
+  import {EMIT_EVENT} from "../core/event";
+  import {pageSizeFun} from "../core/preload";
   import { mainFun } from "../code/index";
   export default{
     name: 'Index',
