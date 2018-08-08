@@ -8,15 +8,18 @@
     "dev": "webpack-dev-server --inline --progress --open --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "build": "node build/build.js",
-    "res": "node build/init.js && http-server -p 5000 ./resource --cors"
+    "res": "node init",
+    "test": "webpack-dev-server --inline --config build/webpack.res.conf.js"
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "cli-color": "^1.2.0",
     "commander": "^2.16.0",
     "http-server": "^0.11.1",
     "node-cmd": "^3.0.0",
     "pixi-spine": "^1.5.16",
     "request": "^2.87.0",
+    "tree-kill": "^1.2.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "xeditor-convertor": "^1.0.60",
