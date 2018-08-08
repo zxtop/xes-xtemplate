@@ -10,16 +10,14 @@ const prompt = inquirer.createPromptModule()
 const plugins = require('../config/plugins.conf')
 
 const error = clc.red.bold
-const warn = clc.yellow
-const notice = clc.blue
+const warn = clc.cyanBright
+const notice = clc.magentaBright
 
 //266c98ed3638c4eb22c80fb690d108ea
 function downloadUrl () {
   if (!fs.existsSync(path.resolve('./resource'))) {
     fs.mkdirSync(path.resolve('./resource'))
   }
-  // process.stdin.setEncoding('utf-8')
-  // process.stdout.write('请输入resourceID : ')
   prompt({type: 'input', name: 'resourceID', message: ['please input a resourceID: ']}).then(answer => {
     'use strict'
     let chunk = answer.resourceID
@@ -27,16 +25,15 @@ function downloadUrl () {
       if (e || data.statusCode !== 200) {
         console.log(error('resourceID错误，error: ' + e))
       }
-      console.log(notice('================================================'))
+      console.log(notice('================================================================================================'))
       let response = ''
-      let urlList = ''
       try {
         response = JSON.parse(data.body)
       } catch (e) {
         console.log(error('error code: ' + e))
         process.exit()
       }
-      urlList = response.list
+      let urlList = response.list
       urlList.map(url => {
         if (!config.exclude.includes(url.ext)) {
           let temp = url.host + url.src.slice(1)
@@ -50,7 +47,7 @@ function downloadUrl () {
       request('http://testmv.xesimg.com/courseware_pages/' + chunk + '/main.json').pipe(fs.createWriteStream(tPath + '/main.json'))
       console.log(warn('resource: moduleConfig.json'))
       request('http://testmv.xesimg.com/courseware_pages/' + chunk + '/moduleConfig.json').pipe(fs.createWriteStream(tPath + '/moduleConfig.json'))
-      console.log(notice('================================================'))
+      console.log(notice('================================================================================================'))
 
       let cnpm = true
       prompt({type: 'list', name: 'cnpm', choices: ['yes', 'no']})
@@ -68,9 +65,9 @@ function downloadUrl () {
           return new Promise((resolve, reject) => {
             if (answer.plugins.length === 0) resolve()
             answer.plugins.map((v, i) => {
-              console.log(notice('================================================'))
+              console.log(notice('================================================================================================'))
               console.log(warn('开始安装插件: ' + v))
-              console.log(notice('================================================'))
+              console.log(notice('================================================================================================'))
               let cmd = (cnpm ? 'cnpm' : 'npm') + ' install --save ' + v
               cp.exec(cmd, (e) => {
                 if (e === null) {
