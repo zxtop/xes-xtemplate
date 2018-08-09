@@ -1,3 +1,3 @@
 module.exports = {
-  plugins:['pixi-spine','TweenMax','choice','blanks','http-server','ddd']
+  plugins:['pixi-spine','matter-js','http-server']
 }

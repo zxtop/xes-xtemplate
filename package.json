@@ -14,9 +14,10 @@
   "dependencies": {
     "axios": "^0.18.0",
     "cli-color": "^1.2.0",
-    "commander": "^2.16.0",
+    "cli-progress": "^2.0.0",
     "http-server": "^0.11.1",
     "inquirer": "^6.1.0",
+    "matter-js": "^0.14.2",
     "node-cmd": "^3.0.0",
     "pixi-spine": "^1.5.16",
     "request": "^2.87.0",

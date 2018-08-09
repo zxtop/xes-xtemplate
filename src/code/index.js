@@ -2,6 +2,8 @@ require('gsap')
 
 require('pixi-spine')
 
+require('matter-js')
+
 export function mainFun () {
   console.log(PIXI.spine)
   this['test_option1'].on('xMouseover', (e) => {
