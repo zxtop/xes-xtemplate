@@ -1,41 +1,40 @@
 <template>
   <div class="container">
-
+    <%if(!canvas){%>
+    <dom-stage :stageObj="stageObj" tabindex="-1" v-if="!canvasRenderer&&showStage"></dom-stage>
+    <%}else{%>
     <canvas-stage :stageObj="stageObj" tabindex="-1" v-if="canvasRenderer&&showStage"></canvas-stage>
-    <button @click="change">test</button>
+    <%}%>
   </div>
 </template>
 <script>
-
+  <%if(!canvas){%>
+  import { domStage, domEE } from 'xes_pixi_renderer'
+  <%}else{%>
   import { canvasStage, canvasEE } from 'xes_canvas_renderer'
-
+  <%}%>
   import { PixiExporter } from 'xeditor-convertor'
 
   import { GET_DATA_FROM_URL } from '../core/utils'
   import { EMIT_EVENT } from '../core/event'
   import { pageSizeFun } from '../core/preload'
 
+  <%plugins.forEach((v)=>{%>
+  <%-'require("'+v+'")'%>
+  <%})%>
 
-  require("xes-choice")
-
-
-
-  import { main0 } from '../code/main0'
-
-  import { main1 } from '../code/main1'
-    let stages = null
+    <%pages.forEach((v,i)=>{%>
+  <%-`import { main${i} } from '../code/main${i}'`%>
+    <%})%>
 
   export default {
     name: 'Index',
     components: {
-
+    <%if(!canvas){%>
+    domStage
+    <%}else{%>
     canvasStage
-
-    },
-    methods:{
-      change(){
-        this.stageObj = stages[1]
-      }
+    <%}%>
     },
     data () {
       return {
@@ -55,17 +54,15 @@
             console.log('资源总个数：' + all)
           },
           () => {
-            stages = pixi.pixiApp.stages
+            let stages = pixi.pixiApp.stages
             dataThis.stageObj = pixi.pixiApp.stage
             pageSizeFun(document, window, dataThis.stageObj.width, dataThis.stageObj.height)
             let stageObj = dataThis.stageObj.toObj()
             EMIT_EVENT(dataThis.canvasRenderer ? canvasEE : domEE, dataThis.stageObj, stageObj)
             dataThis.showStage = true
-
-            main0.bind(stages[0])()
-
-            main1.bind(stages[1])()
-
+            <%pages.map((v,i)=>{%>
+            <%-`main${i}.bind(stages[${i}])()`%>
+            <%})%>
           }
         )
       })

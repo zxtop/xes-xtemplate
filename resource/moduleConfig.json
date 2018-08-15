@@ -1,12 +1,7 @@
-{
-  "type": 0,
-  "stemText": "stem_text",
-  "stemImage": "stem",
-  "rightAnswer": [
-    "test_option1"
-  ],
-  "interference": [
-    "test_option2",
-    "test_option3"
-  ]
-}
+<?xml version="1.0" encoding="UTF-8"?>
+<Error>
+  <Code>MirrorFailed</Code>
+  <Message>Error status : 424 from mirror host, should return 200 OK.</Message>
+  <RequestId>5B74020A354CDB6EC4012728</RequestId>
+  <HostId>xesfile.oss-cn-beijing.aliyuncs.com</HostId>
+</Error>

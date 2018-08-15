@@ -38,6 +38,7 @@
       "children": [
         {
           "name": "bgImg",
+          "conName": "Sprite",
           "visible": true,
           "alpha": 1,
           "rectangle": [
@@ -66,6 +67,7 @@
         },
         {
           "name": "test_option1",
+          "conName": "Choice",
           "visible": true,
           "alpha": 1,
           "groupType": "choice",
@@ -95,6 +97,7 @@
           },
           "children": [
             {
+              "conName": "Text",
               "rectangle": [
                 0,
                 0,
@@ -127,6 +130,7 @@
         },
         {
           "name": "test_option2",
+          "conName": "Choice",
           "visible": true,
           "alpha": 1,
           "groupType": "choice",
@@ -156,6 +160,7 @@
           },
           "children": [
             {
+              "conName": "Text",
               "rectangle": [
                 0,
                 0,
@@ -188,6 +193,7 @@
         },
         {
           "name": "test_option3",
+          "conName": "Choice",
           "visible": true,
           "alpha": 1,
           "groupType": "choice",
@@ -217,6 +223,7 @@
           },
           "children": [
             {
+              "conName": "Text",
               "rectangle": [
                 0,
                 0,
@@ -249,6 +256,7 @@
         },
         {
           "name": "submit_btn",
+          "conName": "Sprite",
           "visible": true,
           "alpha": 1,
           "rectangle": [
@@ -278,6 +286,7 @@
         },
         {
           "name": "stem",
+          "conName": "Text",
           "visible": true,
           "alpha": 1,
           "rectangle": [
@@ -316,10 +325,11 @@
     },
     {
       "modelId": 76,
+      "modelType": 1,
       "width": 1920,
       "height": 1080,
       "id": 1,
-      "remark": "就放假啥豆浆粉",
+      "remark": "测试备注第二页",
       "animationList": [
         {
           "sourceId": "int",
@@ -350,6 +360,7 @@
       "children": [
         {
           "name": "bgImg",
+          "conName": "Sprite",
           "visible": true,
           "alpha": 1,
           "rectangle": [
@@ -378,8 +389,11 @@
         },
         {
           "name": "test_option1",
+          "conName": "Choice",
           "visible": true,
           "alpha": 1,
+          "groupType": "choice",
+          "isRight": true,
           "rectangle": [
             0,
             0,
@@ -405,6 +419,7 @@
           },
           "children": [
             {
+              "conName": "Text",
               "rectangle": [
                 0,
                 0,
@@ -437,8 +452,11 @@
         },
         {
           "name": "test_option2",
+          "conName": "Choice",
           "visible": true,
           "alpha": 1,
+          "groupType": "choice",
+          "isRight": false,
           "rectangle": [
             0,
             0,
@@ -464,6 +482,7 @@
           },
           "children": [
             {
+              "conName": "Text",
               "rectangle": [
                 0,
                 0,
@@ -496,8 +515,11 @@
         },
         {
           "name": "test_option3",
+          "conName": "Choice",
           "visible": true,
           "alpha": 1,
+          "groupType": "choice",
+          "isRight": false,
           "rectangle": [
             0,
             0,
@@ -523,6 +545,7 @@
           },
           "children": [
             {
+              "conName": "Text",
               "rectangle": [
                 0,
                 0,
@@ -555,6 +578,7 @@
         },
         {
           "name": "submit_btn",
+          "conName": "Sprite",
           "visible": true,
           "alpha": 1,
           "rectangle": [
@@ -584,6 +608,7 @@
         },
         {
           "name": "stem",
+          "conName": "Text",
           "visible": true,
           "alpha": 1,
           "rectangle": [
@@ -605,9 +630,8 @@
           ],
           "children": [],
           "texture": {
-            "name": "stem_text",
             "content": {
-              "text": "可激动啊范文芳我们呢佛美味发哦",
+              "text": "第二页第二页第二页第二页第二页第二页",
               "style": {
                 "position": "absolute",
                 "left": 200,
