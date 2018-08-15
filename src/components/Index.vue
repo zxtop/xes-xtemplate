@@ -1,41 +1,36 @@
 <template>
   <div class="container">
-
+    
     <canvas-stage :stageObj="stageObj" tabindex="-1" v-if="canvasRenderer&&showStage"></canvas-stage>
-    <button @click="change">test</button>
+    
   </div>
 </template>
 <script>
-
+  
   import { canvasStage, canvasEE } from 'xes_canvas_renderer'
-
+  
   import { PixiExporter } from 'xeditor-convertor'
 
   import { GET_DATA_FROM_URL } from '../core/utils'
   import { EMIT_EVENT } from '../core/event'
   import { pageSizeFun } from '../core/preload'
 
-
+  
   require("xes-choice")
+  
 
-
-
+    
   import { main0 } from '../code/main0'
-
+    
   import { main1 } from '../code/main1'
-    let stages = null
+    
 
   export default {
     name: 'Index',
     components: {
-
+    
     canvasStage
-
-    },
-    methods:{
-      change(){
-        this.stageObj = stages[1]
-      }
+    
     },
     data () {
       return {
@@ -55,17 +50,17 @@
             console.log('资源总个数：' + all)
           },
           () => {
-            stages = pixi.pixiApp.stages
+            let stages = pixi.pixiApp.stages
             dataThis.stageObj = pixi.pixiApp.stage
             pageSizeFun(document, window, dataThis.stageObj.width, dataThis.stageObj.height)
             let stageObj = dataThis.stageObj.toObj()
             EMIT_EVENT(dataThis.canvasRenderer ? canvasEE : domEE, dataThis.stageObj, stageObj)
             dataThis.showStage = true
-
+            
             main0.bind(stages[0])()
-
+            
             main1.bind(stages[1])()
-
+            
           }
         )
       })
