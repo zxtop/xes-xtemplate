@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     
-    <canvas-stage :stageObj="stageObj" tabindex="-1" v-if="canvasRenderer&&showStage"></canvas-stage>
+    <canvas-stage :stageObj="stageObj" tabindex="-1"></canvas-stage>
     
   </div>
 </template>
@@ -34,7 +34,6 @@
     },
     data () {
       return {
-        canvasRenderer: true,
         stageObj: {},
         showStage: false,
       }
@@ -54,7 +53,9 @@
             dataThis.stageObj = pixi.pixiApp.stage
             pageSizeFun(document, window, dataThis.stageObj.width, dataThis.stageObj.height)
             let stageObj = dataThis.stageObj.toObj()
-            EMIT_EVENT(dataThis.canvasRenderer ? canvasEE : domEE, dataThis.stageObj, stageObj)
+            
+            EMIT_EVENT(canvasEE, dataThis.stageObj, stageObj)
+            
             dataThis.showStage = true
             
             main0.bind(stages[0])()

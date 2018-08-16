@@ -15,8 +15,6 @@ module.exports = (options) => {
     })
   })
 
-
-
   return new Promise((resolve, reject) => {
     ejs.renderFile(path.resolve('./init/index.ejs'), options, {debug: false}, (e, s) => {
       'use strict'

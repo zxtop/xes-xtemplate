@@ -1,9 +1,9 @@
 <template>
   <div class="container">
     <%if(!canvas){%>
-    <dom-stage :stageObj="stageObj" tabindex="-1" v-if="!canvasRenderer&&showStage"></dom-stage>
+    <dom-stage :stageObj="stageObj" tabindex="-1"></dom-stage>
     <%}else{%>
-    <canvas-stage :stageObj="stageObj" tabindex="-1" v-if="canvasRenderer&&showStage"></canvas-stage>
+    <canvas-stage :stageObj="stageObj" tabindex="-1"></canvas-stage>
     <%}%>
   </div>
 </template>
@@ -38,7 +38,6 @@
     },
     data () {
       return {
-        canvasRenderer: true,
         stageObj: {},
         showStage: false,
       }
@@ -58,7 +57,11 @@
             dataThis.stageObj = pixi.pixiApp.stage
             pageSizeFun(document, window, dataThis.stageObj.width, dataThis.stageObj.height)
             let stageObj = dataThis.stageObj.toObj()
-            EMIT_EVENT(dataThis.canvasRenderer ? canvasEE : domEE, dataThis.stageObj, stageObj)
+            <%if(!canvas){%>
+            EMIT_EVENT(domEE, dataThis.stageObj, stageObj)
+            <%}else{%>
+            EMIT_EVENT(canvasEE, dataThis.stageObj, stageObj)
+            <%}%>
             dataThis.showStage = true
             <%pages.map((v,i)=>{%>
             <%-`main${i}.bind(stages[${i}])()`%>
