@@ -9,13 +9,15 @@ module.exports = (options) => {
 
     fs.mkdirSync(path.resolve('./src/code'))
     options.pages.map((v, i) => {
-      fs.writeFileSync(path.resolve('./src/code/main' + i + '.js'), 'export function main' + i + ' () {\n' +
+      fs.writeFileSync(path.resolve('./src/code/main' + i + '.js'), 'export function main' + i + ' (vue,stages) {\n' +
+        '//当前舞台对象vue.stageObj'+'\n'+
+        '//当前所有舞台数组stages'+'\n'+
         '\n' +
         '}')
     })
   })
 
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) =>{
     ejs.renderFile(path.resolve('./init/index.ejs'), options, {debug: false}, (e, s) => {
       'use strict'
       fs.writeFile(path.resolve('./src/components/Index.vue'), s, (e) => {
