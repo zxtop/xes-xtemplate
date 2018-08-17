@@ -3,20 +3,28 @@ const request = require('request')
 const fs = require('fs')
 const cp = require('child_process')
 const clc = require('cli-color')
+
 const config = require('../config/resource.conf.json')
+
 const tPath = path.resolve(config.path)
+
 const inquirer = require('inquirer')
 const prompt = inquirer.createPromptModule()
+
 const plugins = require('../config/plugins.conf')
+
 const _cliProgress = require('cli-progress')
 const initCode = require('./initCode')
+
 const _colors = require('colors')
 const error = clc.red.bold
 const warn = clc.cyanBright
 const notice = clc.magentaBright
+
 let installedPlugins = []
 let resources = []
 let options = {}
+
 const resBar = new _cliProgress.Bar({
   clearOnComplete: true,
   format: `installing plugins [${_colors.blue('{bar}')}] {percentage}% | resource: {name} | {value}/{total}`
@@ -31,6 +39,7 @@ const bar = new _cliProgress.Bar({
 if (!fs.existsSync(path.resolve('./resource'))) {
   fs.mkdirSync(path.resolve('./resource'))
 }
+
 if (!fs.existsSync(path.resolve('./resource/main.json'))) {
   init()
 } else {
@@ -155,8 +164,8 @@ function init () {
             })
           })
           .then(() => {
-          return initCode(options)
-        })
+            return initCode(options)
+          })
           .then(() => {
             'use strict'
             bar.stop()
