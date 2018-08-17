@@ -19,8 +19,8 @@ let getObj = (obj, id) => {
 let eventPropagation = (ev, type, dataEvent) => {
   let evObj = ev;
   let targetObj = getObj(stageObj, ev.id * 1);
-  if (targetObj === undefined) { console.error("没有找到id是" + ev.id + "对象"); return }
-  if (dataEvent[targetObj.name] === undefined) { console.error("没有在this中找到name是" + targetObj.name + "的对象 无法触发emit"); return }
+  if (targetObj === undefined) {  return }
+  if (dataEvent[targetObj.name] === undefined) { return }
   dataEvent[targetObj.name].emit(type, ev);
   // console.log("id:" + ev.id +"  name:"+targetObj.name+"  触发" + type);
   if (targetObj.parent) {
@@ -29,8 +29,18 @@ let eventPropagation = (ev, type, dataEvent) => {
   }
 };
 
+
 export const EMIT_EVENT = function (event, stage, dataEventThis) {
   stageObj = stage;
+  event.removeAllListeners(["click"]);
+  event.removeAllListeners(["dblclick"]);
+  event.removeAllListeners(["mousedown"]);
+  event.removeAllListeners(["mouseup"]);
+  event.removeAllListeners(["mouseout"]);
+  event.removeAllListeners(["mouseover"]);
+  event.removeAllListeners(["mousemove"]);
+  event.removeAllListeners(["keydown"]);
+  event.removeAllListeners(["keyup"]);
   event.on("click", ev => {
     eventPropagation(ev, "xClick", dataEventThis);
   });

@@ -1,9 +1,9 @@
 <template>
   <div class="container">
     <%if(!canvas){%>
-    <dom-stage :stageObj="stageObj" tabindex="-1"></dom-stage>
+    <dom-stage v-if="showStage" :stageObj="stageObj" tabindex="-1"></dom-stage>
     <%}else{%>
-    <canvas-stage :stageObj="stageObj" tabindex="-1"></canvas-stage>
+    <canvas-stage v-if="showStage" :stageObj="stageObj" tabindex="-1"></canvas-stage>
     <%}%>
   </div>
 </template>
@@ -40,6 +40,22 @@
       return {
         stageObj: {},
         showStage: false,
+        pixi:{}
+      }
+    },
+    watch:{
+      stageObjId(){
+        this.pixi.pixiApp.stage = this.stageObj;
+        <%if(!canvas){%>
+        EMIT_EVENT(domEE, this.stageObj, this.stageObj.toObj())
+        <%}else{%>
+        EMIT_EVENT(canvasEE, this.stageObj, this.stageObj.toObj())
+        <%}%>
+      }
+    },
+    computed:{
+      stageObjId(){
+        return this.stageObj.id;
       }
     },
     created () {
@@ -53,18 +69,14 @@
             console.log('资源总个数：' + all)
           },
           () => {
+            this.pixi = pixi;
             let stages = pixi.pixiApp.stages
             dataThis.stageObj = pixi.pixiApp.stage
             pageSizeFun(document, window, dataThis.stageObj.width, dataThis.stageObj.height)
             let stageObj = dataThis.stageObj.toObj()
-            <%if(!canvas){%>
-            EMIT_EVENT(domEE, dataThis.stageObj, stageObj)
-            <%}else{%>
-            EMIT_EVENT(canvasEE, dataThis.stageObj, stageObj)
-            <%}%>
             dataThis.showStage = true
             <%pages.map((v,i)=>{%>
-            <%-`main${i}.bind(stages[${i}])()`%>
+            <%-`main${i}.bind(stages[${i}].toObj())(this,stages)`%>
             <%})%>
           }
         )
