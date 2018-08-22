@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     
-    <canvas-stage :stageObj="stageObj" tabindex="-1"></canvas-stage>
+    <canvas-stage v-if="showStage" :stageObj="stageObj" tabindex="-1"></canvas-stage>
     
   </div>
 </template>
@@ -16,13 +16,11 @@
   import { pageSizeFun } from '../core/preload'
 
   
-  require("xes-choice")
+  require("xes-classification")
   
 
     
   import { main0 } from '../code/main0'
-    
-  import { main1 } from '../code/main1'
     
 
   export default {
@@ -36,6 +34,20 @@
       return {
         stageObj: {},
         showStage: false,
+        pixi:{}
+      }
+    },
+    watch:{
+      stageObjId(){
+        this.pixi.pixiApp.stage = this.stageObj;
+        
+        EMIT_EVENT(canvasEE, this.stageObj, this.stageObj.toObj())
+        
+      }
+    },
+    computed:{
+      stageObjId(){
+        return this.stageObj.id;
       }
     },
     created () {
@@ -49,19 +61,13 @@
             console.log('资源总个数：' + all)
           },
           () => {
+            this.pixi = pixi;
             let stages = pixi.pixiApp.stages
             dataThis.stageObj = pixi.pixiApp.stage
             pageSizeFun(document, window, dataThis.stageObj.width, dataThis.stageObj.height)
             let stageObj = dataThis.stageObj.toObj()
-            
-            EMIT_EVENT(canvasEE, dataThis.stageObj, stageObj)
-            
-            dataThis.showStage = true
-            
-            main0.bind(stages[0])()
-            
-            main1.bind(stages[1])()
-            
+            dataThis.showStage = true;
+            main0.bind(stages[0].toObj())(this,stages);
           }
         )
       })
