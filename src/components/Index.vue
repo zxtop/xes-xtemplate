@@ -18,6 +18,8 @@
   
   require("xes-classification")
   
+  require("xes-pixi-audio")
+  
 
     
   import { main0 } from '../code/main0'

@@ -163,7 +163,8 @@ function init () {
           .then(answer => {
             'use strict'
             answer.plugins.push(plugins.innerPlugins[options.modelType - 1])
-            answer.plugins.concat(plugins.dependencePlugins)
+            answer.plugins = answer.plugins.concat(plugins.dependencePlugins)
+            console.log(answer)
             options.plugins = answer.plugins
             return new Promise((resolve, reject) => {
               if (answer.plugins.length === 0) resolve()

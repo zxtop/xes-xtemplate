@@ -2,6 +2,6 @@
 <Error>
   <Code>MirrorFailed</Code>
   <Message>Error status : 424 from mirror host, should return 200 OK.</Message>
-  <RequestId>5B7D0341D0718EE23279424A</RequestId>
+  <RequestId>5B7E6A843ADDB94A89E46C21</RequestId>
   <HostId>xesfile.oss-cn-beijing.aliyuncs.com</HostId>
 </Error>
