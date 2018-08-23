@@ -72,12 +72,32 @@ if (!fs.existsSync(path.resolve('./resource/main.json'))) {
   })
 }
 
-function init () {
-  prompt({type: 'list', name: 'canvas', message: ['Use canvas renderer or not: '], choices: ['yes', 'no']}).then(an => {
+function removeFiles () {
+  return new Promise((resolve, reject) => {
     'use strict'
-    options.canvas = an.canvas === 'yes'
-    return prompt({type: 'input', name: 'resourceID', message: ['please input a resourceID: ']})
+    fs.readdir(path.resolve('./resource'), (e, files) => {
+      'use strict'
+      if (files.length === 0) resolve()
+      files.map((v, i) => {
+        fs.unlinkSync(path.resolve('./resource/' + v))
+        if (i <= files.length - 1) {
+          resolve()
+        }
+      })
+    })
   })
+}
+
+function init () {
+  removeFiles().then(() => {
+    'use strict'
+    return prompt({type: 'list', name: 'canvas', message: ['Use canvas renderer or not: '], choices: ['yes', 'no']})
+  })
+    .then(an => {
+      'use strict'
+      options.canvas = an.canvas === 'yes'
+      return prompt({type: 'input', name: 'resourceID', message: ['please input a resourceID: ']})
+    })
     .then(answer => {
       'use strict'
       let chunk = answer.resourceID
@@ -143,6 +163,7 @@ function init () {
           .then(answer => {
             'use strict'
             answer.plugins.push(plugins.innerPlugins[options.modelType - 1])
+            answer.plugins.concat(plugins.dependencePlugins)
             options.plugins = answer.plugins
             return new Promise((resolve, reject) => {
               if (answer.plugins.length === 0) resolve()
@@ -150,7 +171,7 @@ function init () {
               installedPlugins = answer.plugins
               answer.plugins.map((v, i) => {
                 let cmd = (cnpm ? 'cnpm' : 'npm') + ' install --save ' + v
-                let pluginInstall = cp.exec(cmd, (e, a) => {
+                cp.exec(cmd, (e, a) => {
                   if (e === null) {
                     bar.update(i + 1, {name: v})
                     if (i === answer.plugins.length - 1) {
