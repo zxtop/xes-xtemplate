@@ -1,36 +1,33 @@
 <template>
   <div class="container">
-    
+
     <canvas-stage v-if="showStage" :stageObj="stageObj" tabindex="-1"></canvas-stage>
-    
+
   </div>
 </template>
 <script>
-  
+
   import { canvasStage, canvasEE } from 'xes_canvas_renderer'
-  
+
   import { PixiExporter } from 'xeditor-convertor'
 
   import { GET_DATA_FROM_URL } from '../core/utils'
   import { EMIT_EVENT } from '../core/event'
   import { pageSizeFun } from '../core/preload'
 
-  
-  require("xes-classification")
-  
-  require("xes-pixi-audio")
-  
 
-    
+  require("xes-classification")
+
+
   import { main0 } from '../code/main0'
-    
+
 
   export default {
     name: 'Index',
     components: {
-    
+
     canvasStage
-    
+
     },
     data () {
       return {
@@ -42,9 +39,9 @@
     watch:{
       stageObjId(){
         this.pixi.pixiApp.stage = this.stageObj;
-        
+
         EMIT_EVENT(canvasEE, this.stageObj, this.stageObj.toObj())
-        
+
       }
     },
     computed:{
@@ -68,10 +65,8 @@
             dataThis.stageObj = pixi.pixiApp.stage
             pageSizeFun(document, window, dataThis.stageObj.width, dataThis.stageObj.height)
             let stageObj = dataThis.stageObj.toObj()
-            dataThis.showStage = true
-            
-            main0.bind(stages[0].toObj())(this,stages)
-            
+            dataThis.showStage = true;
+            main0.bind(stages[0].toObj())(this,stages);
           }
         )
       })
