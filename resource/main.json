@@ -278,39 +278,6 @@
             ],
             "type": "4"
           }
-        },
-        {
-          "name": "sound_btn",
-          "conName": "XAudio",
-          "visible": true,
-          "alpha": 1,
-          "defaultTexture": 8,
-          "changeTexture": 9,
-          "audioId": 10,
-          "rectangle": [
-            0,
-            0,
-            86,
-            86
-          ],
-          "transform": [
-            1650,
-            550,
-            1,
-            1,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          "children": [],
-          "texture": {
-            "content": [
-              8
-            ],
-            "type": "5"
-          }
         }
       ]
     }

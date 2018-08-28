@@ -164,8 +164,8 @@ function init () {
             'use strict'
             answer.plugins.push(plugins.innerPlugins[options.modelType - 1])
             answer.plugins = answer.plugins.concat(plugins.dependencePlugins)
-            console.log(answer)
             options.plugins = answer.plugins
+
             return new Promise((resolve, reject) => {
               if (answer.plugins.length === 0) resolve()
               bar.start(answer.plugins.length, 0, {name: null})
@@ -176,7 +176,7 @@ function init () {
                   if (e === null) {
                     bar.update(i + 1, {name: v})
                     if (i === answer.plugins.length - 1) {
-                      resolve()
+                      resolve(options)
                     }
                   } else {
                     console.log(error(`插件${v}安装失败！code： ${e}`))
@@ -185,8 +185,8 @@ function init () {
               })
             })
           })
-          .then(() => {
-            return initCode(options)
+          .then((option) => {
+            return initCode(option)
           })
           .then(() => {
             'use strict'
