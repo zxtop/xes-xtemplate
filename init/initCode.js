@@ -18,7 +18,7 @@ module.exports = (options) => {
   })
 
   return new Promise((resolve, reject) => {
-    ejs.renderFile(path.resolve('./init/index.ejs'), options, {debug: true}, (e, s) => {
+    ejs.renderFile(path.resolve('./init/index.ejs'), options, {debug: false}, (e, s) => {
       'use strict'
       console.log(e)
       fs.writeFile(path.resolve('./src/components/Index.vue'), s, (e) => {
