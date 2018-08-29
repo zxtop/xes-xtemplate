@@ -131,8 +131,11 @@ function init () {
             mainData = JSON.parse(data.body)
             options.modelType = mainData.pages[0].modelType
             options.pages = []
-            mainData.pages.map(v => {
-              options.pages.push(v.name)
+            mainData.pages.map((v,i) => {
+              let temp = null
+              //todo : When we had the sourceID of stage
+              if(v.sourceID === undefined) temp = 'stage'+i
+              options.pages.push(temp)
             })
           } catch (e) {
             console.log(error('error code: ' + e))

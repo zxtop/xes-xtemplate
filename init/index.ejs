@@ -23,9 +23,6 @@
     require('<%-v%>')
   <%}) %>
 
-  <% pages.forEach((v, i) => {%>
-  <%-`import { main${i} } from '../code/main${i}'` %>
-  <%}) %>
 
   export default {
     name: 'Index',
@@ -81,9 +78,7 @@
           pageSizeFun(document, window, dataThis.stageObj.width, dataThis.stageObj.height)
           let stageObj = dataThis.stageObj.toObj()
           dataThis.showStage = true
-            <% pages.map((v, i) => {%>
-            <%-`main${i}.bind(stages[${i}].toObj())(this,stages)` %>
-            <%}) %>
+
           }
       )
     })

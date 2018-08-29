@@ -16,16 +16,13 @@
   import { pageSizeFun } from '../core/preload'
 
   
-    require('xes-classification')
+    require('xes-choice')
   
     require('xes-pixi-audio')
   
     require('xes-submit')
   
 
-  
-  import { main0 } from '../code/main0'
-  
 
   export default {
     name: 'Index',
@@ -77,9 +74,7 @@
           pageSizeFun(document, window, dataThis.stageObj.width, dataThis.stageObj.height)
           let stageObj = dataThis.stageObj.toObj()
           dataThis.showStage = true
-            
-            main0.bind(stages[0].toObj())(this,stages)
-            
+
           }
       )
     })

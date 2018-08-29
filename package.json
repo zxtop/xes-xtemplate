@@ -26,6 +26,7 @@
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "xeditor-convertor": "^1.0.79",
+    "xes-choice": "^1.0.15",
     "xes-classification": "^1.0.9",
     "xes-ligature": "^1.0.9",
     "xes-pixi-audio": "^1.0.2",

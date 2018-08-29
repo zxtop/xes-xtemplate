@@ -8,12 +8,15 @@ module.exports = (options) => {
   fse.remove(path.resolve('./src/code')).then(() => {
 
     fs.mkdirSync(path.resolve('./src/code'))
+    let tempPages = ''
     options.pages.map((v, i) => {
-      fs.writeFileSync(path.resolve('./src/code/main' + i + '.js'), 'export function main' + i + ' (vue,stages) {\n' +
+      tempPages+=`import {${v}} from '../code/${v}.js' \n`
+      fs.writeFileSync(path.resolve('./src/code/' + v + '.js'), 'export function ' + v + ' (vue,stages) {\n' +
         '//当前舞台对象vue.stageObj' + '\n' +
         '//当前所有舞台数组stages' + '\n' +
         '\n' +
         '}')
+      fs.writeFileSync(path.resolve('./src/core/files.js'),`${tempPages} console.log('abc')`)
     })
   })
 
