@@ -14,7 +14,7 @@
   import { canvasStage, canvasEE } from 'xes_canvas_renderer'
   <%}%>
   import { PixiExporter } from 'xeditor-convertor'
-
+  import {bindStages} from "../core/bindStageEvent";
   import { GET_DATA_FROM_URL } from '../core/utils'
   import { EMIT_EVENT } from '../core/event'
   import { pageSizeFun } from '../core/preload'
@@ -78,7 +78,7 @@
           pageSizeFun(document, window, dataThis.stageObj.width, dataThis.stageObj.height)
           let stageObj = dataThis.stageObj.toObj()
           dataThis.showStage = true
-
+          bindStages(this,stages)
           }
       )
     })
