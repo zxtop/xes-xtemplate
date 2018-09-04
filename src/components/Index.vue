@@ -16,7 +16,7 @@
   import { pageSizeFun } from '../core/preload'
 
   
-    require('xes-classification')
+    require('xes-choice')
   
     require('xes-pixi-audio')
   
