@@ -2,5 +2,6 @@
   "exclude": [
     "json"
   ],
-  "path":"./resource/"
+  "path":"./resource/",
+  "baseUrl":"http://xesfile.oss-cn-beijing.aliyuncs.com/"
 }

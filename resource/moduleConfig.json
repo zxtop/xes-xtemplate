@@ -1,7 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Error>
-  <Code>MirrorFailed</Code>
-  <Message>Error status : 424 from mirror host, should return 200 OK.</Message>
-  <RequestId>5B866F0EAED698676A5FB530</RequestId>
-  <HostId>xesfile.oss-cn-beijing.aliyuncs.com</HostId>
-</Error>
+{"version":"1.0.0"}
