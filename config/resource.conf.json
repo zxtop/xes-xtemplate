@@ -3,5 +3,6 @@
     "json"
   ],
   "path":"./resource/",
-  "baseUrl":"http://xesfile.oss-cn-beijing.aliyuncs.com/"
+  "baseUrl":"http://xesfile.oss-cn-beijing.aliyuncs.com/",
+  "baseUrl1":"http://testmv.xesimg.com/courseware_pages/"
 }
