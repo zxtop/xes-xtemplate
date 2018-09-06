@@ -101,7 +101,7 @@ function init () {
     .then(answer => {
       'use strict'
       let chunk = answer.resourceID
-      request(config.baseUrl + chunk + '/resource.json', (e, data) => {
+      request(config.baseUrl1 + chunk + '/resource.json', (e, data) => {
         if (e || data.statusCode !== 200) {
           console.log(error('resourceID错误，error: ' + e))
         }
@@ -122,10 +122,10 @@ function init () {
             resBar.update(i, {name: url.name + '.' + url.ext})
           }
         })
-        request(config.baseUrl + chunk + '/resource.json').pipe(fs.createWriteStream(tPath + '/resource.json'))
+        request(config.baseUrl1 + chunk + '/resource.json').pipe(fs.createWriteStream(tPath + '/resource.json'))
         resBar.update(urlList.length + 1, {name: 'resource.json'})
         resources.push('resource.json')
-        request(config.baseUrl + chunk + '/main.json', (e, data) => {
+        request(config.baseUrl1 + chunk + '/main.json', (e, data) => {
           let mainData = ''
           try {
             mainData = JSON.parse(data.body)
@@ -144,7 +144,7 @@ function init () {
         }).pipe(fs.createWriteStream(tPath + '/main.json'))
         resBar.update(urlList.length + 2, {name: 'main.json'})
         resources.push('main.json')
-        request(config.baseUrl + chunk + '/moduleConfig.json').pipe(fs.createWriteStream(tPath + '/moduleConfig.json'))
+        request(config.baseUrl1 + chunk + '/moduleConfig.json').pipe(fs.createWriteStream(tPath + '/moduleConfig.json'))
         resBar.update(urlList.length + 3, {name: 'moduleConfig.json'})
         resources.push('moduleConfig.json')
         resBar.stop()
