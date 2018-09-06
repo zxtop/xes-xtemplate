@@ -22,8 +22,6 @@
   
     require('xes-submit')
   
-    require('xes-change-stage')
-  
 
 
   export default {

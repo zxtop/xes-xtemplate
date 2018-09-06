@@ -134,7 +134,7 @@ function init () {
             mainData.pages.map((v,i) => {
               let temp = null
               //todo : When we had the sourceID of stage
-              if(v.sourceID === undefined){temp = 'stage'+i}else{temp = v.sourceId}
+              if(v.sourceId === undefined){temp = 'stage'+i}else{temp = v.sourceId}
               options.pages.push(temp)
             })
           } catch (e) {
