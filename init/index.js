@@ -131,10 +131,9 @@ function init () {
             mainData = JSON.parse(data.body)
             options.modelType = mainData.pages[0].modelType
             options.pages = []
-            mainData.pages.map((v,i) => {
+            mainData.pages.map((v, i) => {
               let temp = null
-              //todo : When we had the sourceID of stage
-              if(v.sourceId === undefined){temp = 'stage'+i}else{temp = v.sourceId}
+              if (v.sourceId === undefined) {temp = 'stage' + i} else {temp = v.sourceId}
               options.pages.push(temp)
             })
           } catch (e) {
@@ -168,23 +167,36 @@ function init () {
             answer.plugins.push(plugins.innerPlugins[options.modelType - 1])
             answer.plugins = answer.plugins.concat(plugins.dependencePlugins)
             options.plugins = answer.plugins
-
             return new Promise((resolve, reject) => {
               if (answer.plugins.length === 0) resolve()
               bar.start(answer.plugins.length, 0, {name: null})
               installedPlugins = answer.plugins
-              answer.plugins.map((v, i) => {
-                let cmd = (cnpm ? 'cnpm' : 'npm') + ' install --save ' + v
+              let i = 0
+              answer.plugins.map((v) => {
+                let cmd = (cnpm ? 'cnpm' : 'npm') + ' install ' + v
                 cp.exec(cmd, (e, a) => {
                   if (e === null) {
                     bar.update(i + 1, {name: v})
-                    if (i === answer.plugins.length - 1) {
+                    if (i === answer.plugins.length) {
                       resolve(options)
                     }
                   } else {
                     console.log(error(`插件${v}安装失败！code： ${e}`))
                   }
+                  i++
                 })
+              })
+              let iRender = (cnpm ? 'cnpm' : 'npm') + ' install ' + plugins.renders[options.canvas ? 0 : 1]
+              cp.exec(iRender, (e, a) => {
+                if (e === null) {
+                  bar.update(i + 1, {name: plugins.renders[options.canvas ? 0 : 1]})
+                  if(i===answer.plugins.length){
+                    resolve(options)
+                  }
+                }else {
+                  console.log(error(`插件${plugins.renders[options.canvas ? 0 : 1]}安装失败！code： ${e}`))
+                }
+                i++
               })
             })
           })
