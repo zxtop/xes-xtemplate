@@ -101,7 +101,7 @@ function init () {
     .then(answer => {
       'use strict'
       let chunk = answer.resourceID
-      request(config.baseUrl1 + chunk + '/resource.json', (e, data) => {
+      request(config.baseUrl + chunk + '/resource.json', (e, data) => {
         if (e || data.statusCode !== 200) {
           console.log(error('resourceID错误，error: ' + e))
         }
@@ -122,19 +122,18 @@ function init () {
             resBar.update(i, {name: url.name + '.' + url.ext})
           }
         })
-        request(config.baseUrl1 + chunk + '/resource.json').pipe(fs.createWriteStream(tPath + '/resource.json'))
+        request(config.baseUrl + chunk + '/resource.json').pipe(fs.createWriteStream(tPath + '/resource.json'))
         resBar.update(urlList.length + 1, {name: 'resource.json'})
         resources.push('resource.json')
-        request(config.baseUrl1 + chunk + '/main.json', (e, data) => {
+        request(config.baseUrl + chunk + '/main.json', (e, data) => {
           let mainData = ''
           try {
             mainData = JSON.parse(data.body)
             options.modelType = mainData.pages[0].modelType
             options.pages = []
-            mainData.pages.map((v,i) => {
+            mainData.pages.map((v, i) => {
               let temp = null
-              //todo : When we had the sourceID of stage
-              if(v.sourceID === undefined){temp = 'stage'+i}else{temp = v.sourceId}
+              if (v.sourceId === undefined) {temp = 'stage' + i} else {temp = v.sourceId}
               options.pages.push(temp)
             })
           } catch (e) {
@@ -144,7 +143,7 @@ function init () {
         }).pipe(fs.createWriteStream(tPath + '/main.json'))
         resBar.update(urlList.length + 2, {name: 'main.json'})
         resources.push('main.json')
-        request(config.baseUrl1 + chunk + '/moduleConfig.json').pipe(fs.createWriteStream(tPath + '/moduleConfig.json'))
+        request(config.baseUrl + chunk + '/moduleConfig.json').pipe(fs.createWriteStream(tPath + '/moduleConfig.json'))
         resBar.update(urlList.length + 3, {name: 'moduleConfig.json'})
         resources.push('moduleConfig.json')
         resBar.stop()
@@ -168,23 +167,36 @@ function init () {
             answer.plugins.push(plugins.innerPlugins[options.modelType - 1])
             answer.plugins = answer.plugins.concat(plugins.dependencePlugins)
             options.plugins = answer.plugins
-
             return new Promise((resolve, reject) => {
               if (answer.plugins.length === 0) resolve()
               bar.start(answer.plugins.length, 0, {name: null})
               installedPlugins = answer.plugins
-              answer.plugins.map((v, i) => {
-                let cmd = (cnpm ? 'cnpm' : 'npm') + ' install --save ' + v
+              let i = 0
+              answer.plugins.map((v) => {
+                let cmd = (cnpm ? 'cnpm' : 'npm') + ' install ' + v
                 cp.exec(cmd, (e, a) => {
                   if (e === null) {
                     bar.update(i + 1, {name: v})
-                    if (i === answer.plugins.length - 1) {
+                    if (i === answer.plugins.length) {
                       resolve(options)
                     }
                   } else {
                     console.log(error(`插件${v}安装失败！code： ${e}`))
                   }
+                  i++
                 })
+              })
+              let iRender = (cnpm ? 'cnpm' : 'npm') + ' install ' + plugins.renders[options.canvas ? 0 : 1]
+              cp.exec(iRender, (e, a) => {
+                if (e === null) {
+                  bar.update(i + 1, {name: plugins.renders[options.canvas ? 0 : 1]})
+                  if(i===answer.plugins.length){
+                    resolve(options)
+                  }
+                }else {
+                  console.log(error(`插件${plugins.renders[options.canvas ? 0 : 1]}安装失败！code： ${e}`))
+                }
+                i++
               })
             })
           })

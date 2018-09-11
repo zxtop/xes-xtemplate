@@ -16,13 +16,13 @@
   import { pageSizeFun } from '../core/preload'
 
   
-    require('xes-choice')
+    require('gsap')
+  
+    require('xes-ligature')
   
     require('xes-pixi-audio')
   
     require('xes-submit')
-  
-    require('xes-change-stage')
   
 
 
