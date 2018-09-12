@@ -72,6 +72,15 @@
           } else {
             body.className += ' load-complete';
           }
+          let data = { type: "loadComplete" };
+          window.parent.postMessage(data, "*");
+          window.addEventListener("message", function(e) {
+            if (e.data.type == "lookAnswerStatus") {
+              console.log("回显结束");
+              let data = { type: "doStatusComplete" };
+              window.parent.postMessage(data, "*");
+            }
+          });
           this.pixi = pixi;
           let stages = pixi.pixiApp.stages
           dataThis.stageObj = pixi.pixiApp.stage

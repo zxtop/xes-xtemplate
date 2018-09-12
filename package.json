@@ -22,7 +22,7 @@
     "request": "^2.87.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
-    "xeditor-convertor": "^1.0.81"
+    "xeditor-convertor": "^1.0.84"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
