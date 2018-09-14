@@ -35,7 +35,6 @@ const bar = new _cliProgress.Bar({
   format: `installing plugins [${_colors.blue('{bar}')}] {percentage}% | plugin: {name} | {value}/{total}`
 }, _cliProgress.Presets.shades_classic)
 
-//266c98ed3638c4eb22c80fb690d108ea
 if (!fs.existsSync(path.resolve('./resource'))) {
   fs.mkdirSync(path.resolve('./resource'))
 }
@@ -101,12 +100,13 @@ function init () {
     .then(answer => {
       'use strict'
       let chunk = answer.resourceID
-      request(config['baseUrl-editor'] + chunk + '/resource.json', (e, data) => {
+      request(config['baseUrl'] + chunk + '/resource.json', (e, data) => {
         if (e || data.statusCode !== 200) {
           console.log(error('resourceID错误，error: ' + e))
         }
         let response = ''
         try {
+          console.log(data.body)
           response = JSON.parse(data.body)
         } catch (e) {
           console.log(error('error code: ' + e))
@@ -122,10 +122,10 @@ function init () {
             resBar.update(i, {name: url.name + '.' + url.ext})
           }
         })
-        request(config['baseUrl-editor'] + chunk + '/resource.json').pipe(fs.createWriteStream(tPath + '/resource.json'))
+        request(config['baseUrl'] + chunk + '/resource.json').pipe(fs.createWriteStream(tPath + '/resource.json'))
         resBar.update(urlList.length + 1, {name: 'resource.json'})
         resources.push('resource.json')
-        request(config['baseUrl-editor'] + chunk + '/main.json', (e, data) => {
+        request(config['baseUrl'] + chunk + '/main.json', (e, data) => {
           let mainData = ''
           try {
             mainData = JSON.parse(data.body)
@@ -143,7 +143,7 @@ function init () {
         }).pipe(fs.createWriteStream(tPath + '/main.json'))
         resBar.update(urlList.length + 2, {name: 'main.json'})
         resources.push('main.json')
-        request(config['baseUrl-editor'] + chunk + '/moduleConfig.json').pipe(fs.createWriteStream(tPath + '/moduleConfig.json'))
+        request(config['baseUrl'] + chunk + '/moduleConfig.json').pipe(fs.createWriteStream(tPath + '/moduleConfig.json'))
         resBar.update(urlList.length + 3, {name: 'moduleConfig.json'})
         resources.push('moduleConfig.json')
         resBar.stop()

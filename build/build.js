@@ -10,8 +10,18 @@ const chalk = require('chalk')
 const webpack = require('webpack')
 const config = require('../config')
 const webpackConfig = require('./webpack.prod.conf')
-
 const spinner = ora('building for production...')
+const fs = require('fs')
+let resource = require('../resource/resource.json')
+
+if(resource){
+  resource.list.map(v=>{
+    v.src = './'+v.src.match(/[^/]*$/i)
+    v.host = ''
+  })
+  fs.writeFileSync(path.resolve('./resource/resource.json'),JSON.stringify(resource))
+}
+
 spinner.start()
 
 rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {

@@ -18,7 +18,7 @@ module.exports = (options) => {
         '//当前所有舞台数组stages' + '\n' +
         '}')
       fs.writeFileSync(path.resolve('./src/code/index.js'), tempPages)
-      fs.writeFileSync(path.resolve('./src/core/bindStageEvent.js'), tempPages2 +
+      fs.writeFileSync(path.resolve('./src/code/bindStageEvent.js'), tempPages2 +
         `\nexport function bindStages(vue,stages){\n
         stages.map((obj)=>{\n
             if(obj.sourceId in stagesEvent){\n

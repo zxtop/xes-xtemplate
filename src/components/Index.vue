@@ -10,15 +10,13 @@
   import { canvasStage, canvasEE } from 'xes_canvas_renderer'
   
   import { PixiExporter } from 'xeditor-convertor'
-  import {bindStages} from "../core/bindStageEvent";
+  import {bindStages} from "../code/bindStageEvent";
   import { GET_DATA_FROM_URL } from '../core/utils'
   import { EMIT_EVENT } from '../core/event'
   import { pageSizeFun } from '../core/preload'
 
   
-    require('gsap')
-  
-    require('xes-ligature')
+    require('xes_fillvacancy')
   
     require('xes-pixi-audio')
   
@@ -70,6 +68,15 @@
           } else {
             body.className += ' load-complete';
           }
+          let data = { type: "loadComplete" };
+          window.parent.postMessage(data, "*");
+          window.addEventListener("message", function(e) {
+            if (e.data.type == "lookAnswerStatus") {
+              console.log("回显结束");
+              let data = { type: "doStatusComplete" };
+              window.parent.postMessage(data, "*");
+            }
+          });
           this.pixi = pixi;
           let stages = pixi.pixiApp.stages
           dataThis.stageObj = pixi.pixiApp.stage
