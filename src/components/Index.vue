@@ -53,6 +53,9 @@
   created() {
     let dataThis = this
     GET_DATA_FROM_URL(() => {
+      let resJson = JSON.parse(window.localStorage.getItem("resource"));
+      resJson.isAbsolutePath = true;
+      window.localStorage.setItem("resource", JSON.stringify(resJson));
 
       let pixi = new PixiExporter(
         JSON.parse(window.localStorage.getItem('main')),
