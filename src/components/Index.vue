@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    
+
         <canvas-stage v-if="showStage" :stageObj="stageObj" tabindex="-1"></canvas-stage>
         
   </div>
@@ -22,7 +22,6 @@
   
     require('xes-submit')
   
-
 
   export default {
     name: 'Index',
@@ -54,6 +53,7 @@
   created() {
     let dataThis = this
     GET_DATA_FROM_URL(() => {
+
       let pixi = new PixiExporter(
         JSON.parse(window.localStorage.getItem('main')),
         JSON.parse(window.localStorage.getItem('resource')),
