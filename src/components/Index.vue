@@ -14,7 +14,7 @@
   import { GET_DATA_FROM_URL } from '../core/utils'
   import { EMIT_EVENT } from '../core/event'
   import { pageSizeFun } from '../core/preload'
-
+  
   
     require('xes_fillvacancy')
   
